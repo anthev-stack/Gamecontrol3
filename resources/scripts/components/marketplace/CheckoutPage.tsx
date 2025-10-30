@@ -13,7 +13,7 @@ const CheckoutPage: React.FC = () => {
     const isAuthenticated = !!user;
 
     const [billingInfo, setBillingInfo] = useState({
-        billing_name: user ? `${user.name_first || ''} ${user.name_last || ''}`.trim() : '',
+        billing_name: user?.username || '',
         billing_email: user?.email || '',
         billing_address: '',
         billing_city: '',
