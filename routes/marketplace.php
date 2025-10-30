@@ -14,7 +14,7 @@ use Pterodactyl\Http\Controllers\Marketplace;
 */
 
 // Public routes (no authentication required)
-Route::get('/', [Marketplace\PlanController::class, 'index'])->name('index')->name('marketplace.home');
+Route::get('/', [Marketplace\PlanController::class, 'index'])->name('index');
 Route::get('/plans', [Marketplace\PlanController::class, 'list'])->name('marketplace.plans.list');
 Route::get('/cart', [Marketplace\CartController::class, 'index'])->name('marketplace.cart.index');
 Route::post('/cart/add', [Marketplace\CartController::class, 'add'])->name('marketplace.cart.add');
