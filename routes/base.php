@@ -4,10 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Pterodactyl\Http\Controllers\Base;
 use Pterodactyl\Http\Middleware\RequireTwoFactorAuthentication;
 
-// Homepage shows marketplace for guests, dashboard for authenticated users
-Route::get('/', [Base\IndexController::class, 'index'])->name('index')
-    ->withoutMiddleware(['auth', 'auth.session', RequireTwoFactorAuthentication::class]);
-
+// Homepage is now defined in RouteServiceProvider directly (public)
 // User dashboard (authenticated)
 Route::get('/dashboard', [Base\IndexController::class, 'dashboard'])->name('dashboard');
 

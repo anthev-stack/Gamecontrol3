@@ -36,6 +36,9 @@ class RouteServiceProvider extends ServiceProvider
 
         $this->routes(function () {
             Route::middleware('web')->group(function () {
+                // PUBLIC homepage route (NO authentication middleware)
+                Route::get('/', [\Pterodactyl\Http\Controllers\Marketplace\PlanController::class, 'index'])->name('index');
+                
                 // Auth routes (guest only)
                 Route::middleware('guest')->prefix('/auth')->group(base_path('routes/auth.php'));
 
@@ -48,8 +51,7 @@ class RouteServiceProvider extends ServiceProvider
                     ->prefix('/admin')
                     ->group(base_path('routes/admin-credits.php'));
 
-                // Marketplace routes FIRST (mix of public and authenticated)
-                // These handle the homepage and must load before base.php
+                // Marketplace routes (mix of public and authenticated)
                 require base_path('routes/marketplace.php');
 
                 // Base Pterodactyl routes (authenticated - dashboard, account, etc)
