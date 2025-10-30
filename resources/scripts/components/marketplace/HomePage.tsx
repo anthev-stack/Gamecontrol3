@@ -96,7 +96,7 @@ const HomePage: React.FC = () => {
                         )}
 
                         <h3 css={tw`text-2xl font-bold mb-2`}>{plan.name}</h3>
-                        <p css={tw`text-neutral-400 mb-4 min-h-12`}>{plan.description}</p>
+                        <p css={tw`text-neutral-400 mb-4`} style={{ minHeight: '3rem' }}>{plan.description}</p>
 
                         <div css={tw`mb-4`}>
                             <div css={tw`text-3xl font-bold text-cyan-400`}>
