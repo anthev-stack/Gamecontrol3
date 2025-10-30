@@ -5,7 +5,8 @@ use Pterodactyl\Http\Controllers\Base;
 use Pterodactyl\Http\Middleware\RequireTwoFactorAuthentication;
 
 // Homepage is now handled by marketplace routes
-// Route::get('/', [Base\IndexController::class, 'index'])->name('index')->fallback();
+// Pterodactyl dashboard moved to /dashboard
+Route::get('/dashboard', [Base\IndexController::class, 'index'])->name('dashboard');
 Route::get('/account', [Base\IndexController::class, 'index'])
     ->withoutMiddleware(RequireTwoFactorAuthentication::class)
     ->name('account');
