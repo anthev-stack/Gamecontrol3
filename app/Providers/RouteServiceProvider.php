@@ -36,8 +36,11 @@ class RouteServiceProvider extends ServiceProvider
 
         $this->routes(function () {
             Route::middleware('web')->group(function () {
-                Route::middleware(['auth.session', RequireTwoFactorAuthentication::class])
-                    ->group(base_path('routes/base.php'));
+                // Marketplace routes FIRST (mix of public and authenticated)
+                // These must load before base.php to handle the homepage
+                require base_path('routes/marketplace.php');
+
+                Route::middleware('guest')->prefix('/auth')->group(base_path('routes/auth.php'));
 
                 Route::middleware(['auth.session', RequireTwoFactorAuthentication::class, AdminAuthenticate::class])
                     ->prefix('/admin')
@@ -47,10 +50,8 @@ class RouteServiceProvider extends ServiceProvider
                     ->prefix('/admin')
                     ->group(base_path('routes/admin-credits.php'));
 
-                Route::middleware('guest')->prefix('/auth')->group(base_path('routes/auth.php'));
-
-                // Marketplace routes (mix of public and authenticated)
-                require base_path('routes/marketplace.php');
+                Route::middleware(['auth.session', RequireTwoFactorAuthentication::class])
+                    ->group(base_path('routes/base.php'));
             });
 
             Route::middleware(['api', RequireTwoFactorAuthentication::class])->group(function () {
