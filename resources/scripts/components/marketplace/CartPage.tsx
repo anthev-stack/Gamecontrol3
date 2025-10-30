@@ -130,10 +130,7 @@ const CartPage: React.FC = () => {
                         <div css={tw`bg-neutral-700 rounded-lg p-6`}>
                             <div css={tw`flex justify-between items-center mb-6`}>
                                 <h2 css={tw`text-2xl font-bold`}>Cart Items ({cart.item_count})</h2>
-                                <button
-                                    onClick={clearCart}
-                                    css={tw`text-red-400 hover:text-red-300 text-sm`}
-                                >
+                                <button onClick={clearCart} css={tw`text-red-400 hover:text-red-300 text-sm`}>
                                     Clear Cart
                                 </button>
                             </div>
@@ -227,4 +224,3 @@ const CartPage: React.FC = () => {
 };
 
 export default CartPage;
-

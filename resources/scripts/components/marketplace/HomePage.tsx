@@ -76,11 +76,7 @@ const HomePage: React.FC = () => {
 
     return (
         <PageContentBlock title='Hosting Plans'>
-            {error && (
-                <div css={tw`bg-red-500 text-white p-4 rounded mb-4`}>
-                    {error}
-                </div>
-            )}
+            {error && <div css={tw`bg-red-500 text-white p-4 rounded mb-4`}>{error}</div>}
 
             <div css={tw`mb-8 text-center`}>
                 <h1 css={tw`text-4xl font-bold mb-4`}>Choose Your Perfect Hosting Plan</h1>
@@ -161,4 +157,3 @@ const HomePage: React.FC = () => {
 };
 
 export default HomePage;
-

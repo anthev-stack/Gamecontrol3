@@ -13,7 +13,7 @@ const CheckoutPage: React.FC = () => {
     const isAuthenticated = !!user;
 
     const [billingInfo, setBillingInfo] = useState({
-        billing_name: user?.name || '',
+        billing_name: user ? `${user.name_first || ''} ${user.name_last || ''}`.trim() : '',
         billing_email: user?.email || '',
         billing_address: '',
         billing_city: '',
@@ -55,13 +55,14 @@ const CheckoutPage: React.FC = () => {
                 headers: {
                     'Content-Type': 'application/json',
                     'X-Requested-With': 'XMLHttpRequest',
-                    'X-CSRF-TOKEN': (document.querySelector('meta[name="csrf-token"]') as HTMLMetaElement)?.content || '',
+                    'X-CSRF-TOKEN':
+                        (document.querySelector('meta[name="csrf-token"]') as HTMLMetaElement)?.content || '',
                 },
                 body: JSON.stringify({
                     ...billingInfo,
-                    ...(accountInfo.create_account && { 
+                    ...(accountInfo.create_account && {
                         register: true,
-                        password: accountInfo.password 
+                        password: accountInfo.password,
                     }),
                 }),
             });
@@ -85,11 +86,7 @@ const CheckoutPage: React.FC = () => {
     return (
         <PageContentBlock title='Checkout'>
             <div css={tw`max-w-4xl mx-auto`}>
-                {error && (
-                    <div css={tw`bg-red-500 text-white p-4 rounded mb-4`}>
-                        {error}
-                    </div>
-                )}
+                {error && <div css={tw`bg-red-500 text-white p-4 rounded mb-4`}>{error}</div>}
 
                 <form onSubmit={handleSubmit}>
                     <div css={tw`grid grid-cols-1 lg:grid-cols-2 gap-6`}>
@@ -103,7 +100,9 @@ const CheckoutPage: React.FC = () => {
                                     <Input
                                         type='text'
                                         value={billingInfo.billing_name}
-                                        onChange={(e) => setBillingInfo({ ...billingInfo, billing_name: e.target.value })}
+                                        onChange={(e) =>
+                                            setBillingInfo({ ...billingInfo, billing_name: e.target.value })
+                                        }
                                         required
                                     />
                                 </div>
@@ -113,7 +112,9 @@ const CheckoutPage: React.FC = () => {
                                     <Input
                                         type='email'
                                         value={billingInfo.billing_email}
-                                        onChange={(e) => setBillingInfo({ ...billingInfo, billing_email: e.target.value })}
+                                        onChange={(e) =>
+                                            setBillingInfo({ ...billingInfo, billing_email: e.target.value })
+                                        }
                                         required
                                     />
                                 </div>
@@ -123,7 +124,9 @@ const CheckoutPage: React.FC = () => {
                                     <Input
                                         type='text'
                                         value={billingInfo.billing_address}
-                                        onChange={(e) => setBillingInfo({ ...billingInfo, billing_address: e.target.value })}
+                                        onChange={(e) =>
+                                            setBillingInfo({ ...billingInfo, billing_address: e.target.value })
+                                        }
                                     />
                                 </div>
 
@@ -133,7 +136,9 @@ const CheckoutPage: React.FC = () => {
                                         <Input
                                             type='text'
                                             value={billingInfo.billing_city}
-                                            onChange={(e) => setBillingInfo({ ...billingInfo, billing_city: e.target.value })}
+                                            onChange={(e) =>
+                                                setBillingInfo({ ...billingInfo, billing_city: e.target.value })
+                                            }
                                         />
                                     </div>
                                     <div>
@@ -141,7 +146,9 @@ const CheckoutPage: React.FC = () => {
                                         <Input
                                             type='text'
                                             value={billingInfo.billing_state}
-                                            onChange={(e) => setBillingInfo({ ...billingInfo, billing_state: e.target.value })}
+                                            onChange={(e) =>
+                                                setBillingInfo({ ...billingInfo, billing_state: e.target.value })
+                                            }
                                         />
                                     </div>
                                 </div>
@@ -152,7 +159,9 @@ const CheckoutPage: React.FC = () => {
                                         <Input
                                             type='text'
                                             value={billingInfo.billing_country}
-                                            onChange={(e) => setBillingInfo({ ...billingInfo, billing_country: e.target.value })}
+                                            onChange={(e) =>
+                                                setBillingInfo({ ...billingInfo, billing_country: e.target.value })
+                                            }
                                         />
                                     </div>
                                     <div>
@@ -160,7 +169,9 @@ const CheckoutPage: React.FC = () => {
                                         <Input
                                             type='text'
                                             value={billingInfo.billing_postal_code}
-                                            onChange={(e) => setBillingInfo({ ...billingInfo, billing_postal_code: e.target.value })}
+                                            onChange={(e) =>
+                                                setBillingInfo({ ...billingInfo, billing_postal_code: e.target.value })
+                                            }
                                         />
                                     </div>
                                 </div>
@@ -180,7 +191,9 @@ const CheckoutPage: React.FC = () => {
                                             <Input
                                                 type='password'
                                                 value={accountInfo.password}
-                                                onChange={(e) => setAccountInfo({ ...accountInfo, password: e.target.value })}
+                                                onChange={(e) =>
+                                                    setAccountInfo({ ...accountInfo, password: e.target.value })
+                                                }
                                                 required={accountInfo.create_account}
                                             />
                                             <p css={tw`text-xs text-neutral-400 mt-1`}>Minimum 8 characters</p>
@@ -192,7 +205,10 @@ const CheckoutPage: React.FC = () => {
                                                 type='password'
                                                 value={accountInfo.password_confirmation}
                                                 onChange={(e) =>
-                                                    setAccountInfo({ ...accountInfo, password_confirmation: e.target.value })
+                                                    setAccountInfo({
+                                                        ...accountInfo,
+                                                        password_confirmation: e.target.value,
+                                                    })
                                                 }
                                                 required={accountInfo.create_account}
                                             />
@@ -206,11 +222,7 @@ const CheckoutPage: React.FC = () => {
                                 <h3 css={tw`text-xl font-bold mb-4`}>Order Summary</h3>
                                 <p css={tw`text-neutral-400 mb-4`}>Review your cart before completing the order.</p>
 
-                                <Button
-                                    type='submit'
-                                    disabled={loading}
-                                    css={tw`w-full`}
-                                >
+                                <Button type='submit' disabled={loading} css={tw`w-full`}>
                                     {loading ? 'Processing...' : 'Complete Order'}
                                 </Button>
 
@@ -227,4 +239,3 @@ const CheckoutPage: React.FC = () => {
 };
 
 export default CheckoutPage;
-

@@ -203,9 +203,7 @@ const BillingPage: React.FC = () => {
                                             <FontAwesomeIcon icon={getStatusIcon(invoice.status)} css={tw`mr-2`} />
                                             <span css={tw`capitalize font-semibold`}>{invoice.status}</span>
                                         </div>
-                                        {invoice.is_overdue && (
-                                            <div css={tw`text-red-400 text-sm mt-1`}>Overdue</div>
-                                        )}
+                                        {invoice.is_overdue && <div css={tw`text-red-400 text-sm mt-1`}>Overdue</div>}
                                     </div>
                                 </div>
                             </div>
@@ -218,4 +216,3 @@ const BillingPage: React.FC = () => {
 };
 
 export default BillingPage;
-
