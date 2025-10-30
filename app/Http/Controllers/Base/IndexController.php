@@ -19,9 +19,19 @@ class IndexController extends Controller
     }
 
     /**
-     * Returns listing of user's servers.
+     * Returns listing of user's servers OR marketplace homepage.
      */
     public function index(): View
+    {
+        // If user is authenticated, show their dashboard
+        // If not authenticated, show marketplace homepage
+        return $this->view->make('templates/base.core');
+    }
+    
+    /**
+     * Returns user's server dashboard (authenticated users only).
+     */
+    public function dashboard(): View
     {
         return $this->view->make('templates/base.core');
     }

@@ -4,9 +4,14 @@ use Illuminate\Support\Facades\Route;
 use Pterodactyl\Http\Controllers\Base;
 use Pterodactyl\Http\Middleware\RequireTwoFactorAuthentication;
 
-// Homepage is now handled by marketplace routes
-// Pterodactyl dashboard moved to /dashboard
-Route::get('/dashboard', [Base\IndexController::class, 'index'])->name('dashboard');
+// Homepage shows marketplace for guests, dashboard for authenticated users
+Route::get('/', [Base\IndexController::class, 'index'])->name('index')
+    ->withoutMiddleware(['auth', 'auth.session', RequireTwoFactorAuthentication::class]);
+
+// User dashboard (authenticated)
+Route::get('/dashboard', [Base\IndexController::class, 'dashboard'])->name('dashboard');
+
+// Account settings (authenticated)
 Route::get('/account', [Base\IndexController::class, 'index'])
     ->withoutMiddleware(RequireTwoFactorAuthentication::class)
     ->name('account');

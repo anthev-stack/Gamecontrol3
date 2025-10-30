@@ -13,11 +13,9 @@ use Pterodactyl\Http\Controllers\Marketplace;
 |
 */
 
-// Public routes (no authentication required - NO MIDDLEWARE!)
-Route::withoutMiddleware(['auth', 'auth.session'])->group(function () {
-    Route::get('/', [Marketplace\PlanController::class, 'index'])->name('index');
-    Route::get('/plans', [Marketplace\PlanController::class, 'list'])->name('marketplace.plans.list');
-});
+// Public routes (no authentication required)
+Route::get('/plans', [Marketplace\PlanController::class, 'list'])->name('marketplace.plans.list')
+    ->withoutMiddleware(['auth', 'auth.session']);
 Route::get('/cart', [Marketplace\CartController::class, 'index'])->name('marketplace.cart.index');
 Route::post('/cart/add', [Marketplace\CartController::class, 'add'])->name('marketplace.cart.add');
 Route::get('/cart/show', [Marketplace\CartController::class, 'show'])->name('marketplace.cart.show');
