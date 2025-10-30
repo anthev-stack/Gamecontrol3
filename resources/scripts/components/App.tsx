@@ -18,6 +18,7 @@ import Spinner from '@/components/elements/Spinner';
 const DashboardRouter = lazy(() => import(/* webpackChunkName: "dashboard" */ '@/routers/DashboardRouter'));
 const ServerRouter = lazy(() => import(/* webpackChunkName: "server" */ '@/routers/ServerRouter'));
 const AuthenticationRouter = lazy(() => import(/* webpackChunkName: "auth" */ '@/routers/AuthenticationRouter'));
+const HomePage = lazy(() => import(/* webpackChunkName: "marketplace" */ '@/components/marketplace/HomePage'));
 
 interface ExtendedWindow extends Window {
     SiteConfiguration?: SiteSettings;
@@ -69,6 +70,11 @@ const App = () => {
                                     <AuthenticationRouter />
                                 </Spinner.Suspense>
                             </Route>
+                            <Route path={'/'} exact>
+                                <Spinner.Suspense>
+                                    <HomePage />
+                                </Spinner.Suspense>
+                            </Route>
                             <AuthenticatedRoute path={'/server/:id'}>
                                 <Spinner.Suspense>
                                     <ServerContext.Provider>
@@ -76,7 +82,17 @@ const App = () => {
                                     </ServerContext.Provider>
                                 </Spinner.Suspense>
                             </AuthenticatedRoute>
-                            <AuthenticatedRoute path={'/'}>
+                            <AuthenticatedRoute path={'/dashboard'}>
+                                <Spinner.Suspense>
+                                    <DashboardRouter />
+                                </Spinner.Suspense>
+                            </AuthenticatedRoute>
+                            <AuthenticatedRoute path={'/account'}>
+                                <Spinner.Suspense>
+                                    <DashboardRouter />
+                                </Spinner.Suspense>
+                            </AuthenticatedRoute>
+                            <AuthenticatedRoute path={'/billing'}>
                                 <Spinner.Suspense>
                                     <DashboardRouter />
                                 </Spinner.Suspense>

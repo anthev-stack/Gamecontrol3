@@ -31,6 +31,9 @@ export default () => {
             <TransitionRouter>
                 <React.Suspense fallback={<Spinner centered />}>
                     <Switch location={location}>
+                        <Route path={'/dashboard'} exact>
+                            <DashboardContainer />
+                        </Route>
                         <Route path={'/'} exact>
                             <DashboardContainer />
                         </Route>
