@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import tw from 'twin.macro';
 import Button from '@/components/elements/Button';
 import Field from '@/components/elements/Field';
 import { httpErrorToHuman } from '@/api/http';
-import { useStoreState } from '@/state/hooks';
+import register from '@/api/auth/register';
 import { Formik, FormikHelpers } from 'formik';
 import { object, string, ref } from 'yup';
 
@@ -18,28 +18,25 @@ interface Values {
 }
 
 const RegisterContainer = () => {
-    const history = useHistory();
     const [error, setError] = useState('');
 
     const submit = async (values: Values, { setSubmitting }: FormikHelpers<Values>) => {
         setError('');
 
         try {
-            const response = await fetch('/auth/register', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-Requested-With': 'XMLHttpRequest',
-                },
-                body: JSON.stringify(values),
+            const response = await register({
+                email: values.email,
+                username: values.username,
+                name_first: values.name_first,
+                name_last: values.name_last,
+                password: values.password,
+                password_confirmation: values.password_confirmation,
             });
 
-            const data = await response.json();
-
-            if (response.ok) {
-                window.location.href = data.redirect || '/dashboard';
+            if (response.success) {
+                window.location.href = response.redirect || '/dashboard';
             } else {
-                setError(data.error || 'Failed to create account');
+                setError(response.error || 'Failed to create account');
             }
         } catch (err) {
             setError(httpErrorToHuman(err));
@@ -78,9 +75,7 @@ const RegisterContainer = () => {
                 <div css={tw`w-full flex`}>
                     <div css={tw`w-full md:w-1/2 mx-auto p-6 md:p-10`}>
                         <h2 css={tw`text-3xl text-center font-medium py-4`}>Create Account</h2>
-                        {error && (
-                            <div css={tw`bg-red-500 text-white text-sm p-3 rounded mb-4`}>{error}</div>
-                        )}
+                        {error && <div css={tw`bg-red-500 text-white text-sm p-3 rounded mb-4`}>{error}</div>}
                         <div css={tw`mt-6`}>
                             <Field type={'email'} label={'Email'} name={'email'} />
                         </div>
@@ -118,4 +113,3 @@ const RegisterContainer = () => {
 };
 
 export default RegisterContainer;
-

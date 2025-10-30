@@ -114,9 +114,7 @@ const HomePage: React.FC = () => {
             {/* Hero Section */}
             <HeroSection>
                 <div css={tw`max-w-7xl mx-auto text-center`}>
-                    <h1 css={tw`text-5xl md:text-6xl font-bold mb-6`}>
-                        Premium Game Server Hosting
-                    </h1>
+                    <h1 css={tw`text-5xl md:text-6xl font-bold mb-6`}>Premium Game Server Hosting</h1>
                     <p css={tw`text-xl md:text-2xl mb-8 text-cyan-100`}>
                         Lightning-fast servers, instant setup, and 24/7 support
                     </p>
@@ -145,23 +143,17 @@ const HomePage: React.FC = () => {
                         <FeatureCard>
                             <FontAwesomeIcon icon={faRocket} css={tw`text-5xl text-cyan-400 mb-4`} />
                             <h3 css={tw`text-xl font-bold mb-3`}>Instant Deployment</h3>
-                            <p css={tw`text-neutral-400`}>
-                                Your server is ready in seconds. No waiting, no hassle.
-                            </p>
+                            <p css={tw`text-neutral-400`}>Your server is ready in seconds. No waiting, no hassle.</p>
                         </FeatureCard>
                         <FeatureCard>
                             <FontAwesomeIcon icon={faShieldAlt} css={tw`text-5xl text-cyan-400 mb-4`} />
                             <h3 css={tw`text-xl font-bold mb-3`}>DDoS Protection</h3>
-                            <p css={tw`text-neutral-400`}>
-                                Enterprise-grade DDoS protection keeps your server online.
-                            </p>
+                            <p css={tw`text-neutral-400`}>Enterprise-grade DDoS protection keeps your server online.</p>
                         </FeatureCard>
                         <FeatureCard>
                             <FontAwesomeIcon icon={faHeadset} css={tw`text-5xl text-cyan-400 mb-4`} />
                             <h3 css={tw`text-xl font-bold mb-3`}>24/7 Support</h3>
-                            <p css={tw`text-neutral-400`}>
-                                Our expert team is always here to help you succeed.
-                            </p>
+                            <p css={tw`text-neutral-400`}>Our expert team is always here to help you succeed.</p>
                         </FeatureCard>
                     </div>
                 </div>
@@ -172,9 +164,7 @@ const HomePage: React.FC = () => {
                 <div css={tw`max-w-7xl mx-auto`}>
                     <div css={tw`text-center mb-12`}>
                         <h2 css={tw`text-4xl font-bold mb-4`}>Choose Your Perfect Plan</h2>
-                        <p css={tw`text-neutral-300 text-lg`}>
-                            Powerful hosting with transparent pricing
-                        </p>
+                        <p css={tw`text-neutral-300 text-lg`}>Powerful hosting with transparent pricing</p>
                     </div>
 
                     {error && <div css={tw`bg-red-500 text-white p-4 rounded mb-6 text-center`}>{error}</div>}
@@ -199,7 +189,9 @@ const HomePage: React.FC = () => {
                                 <div css={tw`text-center mb-6`}>
                                     <div css={tw`text-4xl font-bold text-cyan-400`}>
                                         ${plan.price}
-                                        <span css={tw`text-lg text-neutral-400 font-normal`}>/{plan.billing_period}</span>
+                                        <span css={tw`text-lg text-neutral-400 font-normal`}>
+                                            /{plan.billing_period}
+                                        </span>
                                     </div>
                                 </div>
 
@@ -258,9 +250,7 @@ const HomePage: React.FC = () => {
             {/* Footer */}
             <footer css={tw`bg-neutral-900 py-12 px-6 border-t border-neutral-800`}>
                 <div css={tw`max-w-7xl mx-auto text-center`}>
-                    <p css={tw`text-neutral-400`}>
-                        &copy; 2025 GameControl. All rights reserved.
-                    </p>
+                    <p css={tw`text-neutral-400`}>&copy; 2025 GameControl. All rights reserved.</p>
                     <div css={tw`mt-4 space-x-6`}>
                         <Link to={'/auth/login'} css={tw`text-neutral-500 hover:text-neutral-300 no-underline`}>
                             Login
