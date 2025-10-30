@@ -51,4 +51,3 @@ export default ({
             .catch(reject);
     });
 };
-
